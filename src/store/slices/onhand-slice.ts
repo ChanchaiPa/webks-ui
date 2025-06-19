@@ -63,7 +63,7 @@ export default OnhadSlice.reducer
 
 
 export const OnhandAction =(cond: _SearchCond, navigate: any) => {
-    const _serviceurl = env.url+'/v1/ticket/onhand';
+    const _serviceurl = env.url+'v1/ticket/onhand';
     return async(dispatch: any) => {
         dispatch( _loading() );
         try {
@@ -93,7 +93,7 @@ export const OnhandAction =(cond: _SearchCond, navigate: any) => {
 
 
 export const InProcAction =(cond: _SearchCond, navigate: any) => {
-    const _serviceurl = env.url+'/v1/ticket/inproc';
+    const _serviceurl = env.url+'v1/ticket/inproc';
     return async(dispatch: any) => {
         dispatch( _loading() );
         try {

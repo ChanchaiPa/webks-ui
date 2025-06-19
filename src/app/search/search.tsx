@@ -37,7 +37,7 @@ export default function Search() {
         setState({...state, pageNo: page});
         const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
         dispatch( _loadingStart() );
-        axios.post(env.url+'/v1/ticket/tracking', state, config).then(response => {
+        axios.post(env.url+'v1/ticket/tracking', state, config).then(response => {
             dispatch( _loadingFinish() );
             const resData  = response.data;
             const resList  = resData.list as _Ticket[];

@@ -67,7 +67,7 @@ export const SearchAction = (pageNo: number, pageSize: number, totalRec: number,
     _param += "&pageSize=" + pageSize;
     _param += "&totalRec=" + totalRec;
 
-    const _serviceurl = env.url+'/v1/lookup/agent' + _param;
+    const _serviceurl = env.url+'v1/lookup/agent' + _param;
     return async (dispatch: any) =>{
         dispatch( _loading() );
         try {

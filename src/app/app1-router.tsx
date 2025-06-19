@@ -11,12 +11,11 @@ const app_root = env.app_root;
 export const App1Router = (props: any) => {
     return(<BrowserRouter basename={env.basename}>
         <Routes >
-            <Route path={"/login"} element={ <App2Login/> } />
-            <Route path={"/"} element={<Navigate to="/login"></Navigate>} />
+            <Route path={ app_root+"/index.html" } element={<Navigate to={ app_root+"/login" }></Navigate>} />
+            <Route path={ app_root+"/login" } element={ <App2Login/> } />
             
             <Route path="/" element={ <ProtectedRoutes/> }>
                 <Route path={app_root + "/welcome"} element={ <App3Content/> } />
-                
                 <Route path={app_root + "/home"}  element={ <App3Content/> } />
                 <Route path={app_root + "/search"} element={ <App3Content/> } /> 
                 <Route path={app_root + "/inbox"} element={ <App3Content/> } /> 
@@ -34,5 +33,5 @@ export const App1Router = (props: any) => {
 //*****************************************************************/
   const ProtectedRoutes = (props: any) => {
     const authenState = useSelector((state: RootState) => state.AuthenSlicer);
-    return authenState.userid ? <Outlet /> : <Navigate to="/login" />;
+    return authenState.userid ? <Outlet /> : <Navigate to={ app_root+"/login" } />;
   };  

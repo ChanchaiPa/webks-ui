@@ -65,9 +65,9 @@ export default TicketSlice.reducer
 export const GetdataAction = (ticket_id: number, navigate: any) =>{
     let _serviceurl = "";
     if (ticket_id===0)
-        _serviceurl = env.url+'/v1/ticket/create';
+        _serviceurl = env.url+'v1/ticket/create';
     else
-        _serviceurl = env.url+'/v1/ticket/content/' + ticket_id;
+        _serviceurl = env.url+'v1/ticket/content/' + ticket_id;
     //const _serviceurl = env.url+'/v1/ticket/' + ticket_id;
     return async (dispatch: any) => {
         dispatch( _loading() );
@@ -78,17 +78,17 @@ export const GetdataAction = (ticket_id: number, navigate: any) =>{
             
             let ssimL2 = [];
             if (ticket.system_id > 0) {
-                const result = await axios.get(env.url+'/v1/lookup/subsystem/'+ticket.system_id, config); 
+                const result = await axios.get(env.url+'v1/lookup/subsystem/'+ticket.system_id, config); 
                 ssimL2 = result.data; 
             }
             let ssimL3 = [];
             if (ticket.subsystem_id > 0) {
-                const result = await axios.get(env.url+'/v1/lookup/item/'+ticket.system_id+"/"+ticket.subsystem_id, config);  
+                const result = await axios.get(env.url+'v1/lookup/item/'+ticket.system_id+"/"+ticket.subsystem_id, config);  
                 ssimL3 = result.data; 
             }
             let ssimL4 = [];
             if (ticket.item_id > 0) {
-                const result = await axios.get(env.url+'/v1/lookup/module/'+ticket.system_id+"/"+ticket.subsystem_id+"/"+ticket.item_id, config);  
+                const result = await axios.get(env.url+'v1/lookup/module/'+ticket.system_id+"/"+ticket.subsystem_id+"/"+ticket.item_id, config);  
                 ssimL4 = result.data; 
             }
 
@@ -103,7 +103,7 @@ export const GetdataAction = (ticket_id: number, navigate: any) =>{
 }
 
 export const UpdatedataAction = (param: _Ticket, navigate: any) =>{
-    const _serviceurl = env.url+'/v1/ticket/update';
+    const _serviceurl = env.url+'v1/ticket/update';
     return async (dispatch: any) => {
         dispatch( _loading() );
         try {
@@ -126,17 +126,17 @@ export const SetCategoryAction = (system_id: number, subsystem_id: number, item_
             const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
             let ssimL2 = [];
             if (system_id > 0) {
-                const result = await axios.get(env.url+'/v1/lookup/subsystem/'+system_id, config); 
+                const result = await axios.get(env.url+'v1/lookup/subsystem/'+system_id, config); 
                 ssimL2 = result.data; 
             }
             let ssimL3 = [];
             if (subsystem_id > 0) {
-                const result = await axios.get(env.url+'/v1/lookup/item/'+system_id+"/"+subsystem_id, config);  
+                const result = await axios.get(env.url+'v1/lookup/item/'+system_id+"/"+subsystem_id, config);  
                 ssimL3 = result.data; 
             }
             let ssimL4 = [];
             if (item_id > 0) {
-                const result = await axios.get(env.url+'/v1/lookup/module/'+system_id+"/"+subsystem_id+"/"+item_id, config);  
+                const result = await axios.get(env.url+'v1/lookup/module/'+system_id+"/"+subsystem_id+"/"+item_id, config);  
                 ssimL4 = result.data; 
             }
             dispatch( _set_category({ssimL2: ssimL2, ssimL3: ssimL3, ssimL4: ssimL4, errmsg: ''} as any) );     
@@ -153,7 +153,7 @@ export const GetSubsystemAction = (system_id: number) =>{
         dispatch( _loading() );
         try {
             const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-            const response = await axios.get(env.url+'/v1/lookup/subsystem/'+system_id, config); 
+            const response = await axios.get(env.url+'v1/lookup/subsystem/'+system_id, config); 
             const ssimL2 = response.data;
             dispatch( _set_category({ssimL2: ssimL2, ssimL3: [], ssimL4: [], errmsg: ''} as any) );           
         }
@@ -174,7 +174,7 @@ export const GetItemAction = (system_id: number, subsystem_id: number) =>{
         dispatch( _loading() );
         try {
             const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-            const response = await axios.get(env.url+'/v1/lookup/item/'+system_id+"/"+subsystem_id, config);  
+            const response = await axios.get(env.url+'v1/lookup/item/'+system_id+"/"+subsystem_id, config);  
             const ssimL3 = response.data;
             dispatch( _set_category({ssimL3: ssimL3, ssimL4: [], errmsg: ''} as any) );           
         }
@@ -195,7 +195,7 @@ export const GetModuleAction = (system_id: number, subsystem_id: number, item_id
         dispatch( _loading() );
         try {
             const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-            const response = await axios.get(env.url+'/v1/lookup/module/'+system_id+"/"+subsystem_id+"/"+item_id, config);   
+            const response = await axios.get(env.url+'v1/lookup/module/'+system_id+"/"+subsystem_id+"/"+item_id, config);   
             const ssimL4 = response.data;
             dispatch( _set_category({ssimL4: ssimL4, errmsg: ''} as any) );           
         }
@@ -216,7 +216,7 @@ export const GetAttachmentAction = (ticket_id: number) =>{
         dispatch( _loading() );
         try {
             const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-            const response = await axios.get(env.url+'/v1/ticket/attachment/'+ticket_id, config);   
+            const response = await axios.get(env.url+'v1/ticket/attachment/'+ticket_id, config);   
             const attach = response.data;
             dispatch( _set_attach({attach: attach, errmsg: ''} as any) );           
         }
@@ -236,9 +236,9 @@ export const UploadAttachmentAction = (ticket_id: number, files: FormData) =>{
     return async (dispatch: any) =>{
         dispatch( _loading() );
         try {
-            const response1 = await axios.post(env.url+'/v1/ticket/upload/'+ticket_id, files, { withCredentials: true });   
+            const response1 = await axios.post(env.url+'v1/ticket/upload/'+ticket_id, files, { withCredentials: true });   
             const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-            const response2 = await axios.get(env.url+'/v1/ticket/attachment/'+ticket_id, config);   
+            const response2 = await axios.get(env.url+'v1/ticket/attachment/'+ticket_id, config);   
             const attach = response2.data;
             dispatch( _set_attach({attach: attach, errmsg: ''} as any) );    
         }

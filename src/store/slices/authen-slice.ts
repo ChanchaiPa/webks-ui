@@ -86,13 +86,13 @@ export const LoginAction = (login: any, navigate: any) =>{
       dispatch( _loadingStart() );
       try {
           const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-          const response = await axios.post(env.url+"/v1/authen/login", login, config);
+          const response = await axios.post(env.url+"v1/authen/login", login, config);
           //const resStatus= response.status;
           const resData  = response.data;
           if (resData.userid !== "") {
-              const agents = await axios.get(env.url+'/v1/lookup/agent?pageNo=-1&pageSize=-1&totalRec=-1', config);  
+              const agents = await axios.get(env.url+'v1/lookup/agent?pageNo=-1&pageSize=-1&totalRec=-1', config);  
               localStorage.setItem("agent_list", JSON.stringify(agents.data)); 
-              const groups = await axios.get(env.url+'/v1/lookup/group', config);  
+              const groups = await axios.get(env.url+'v1/lookup/group', config);  
               localStorage.setItem("group_list", JSON.stringify(groups.data));  
 
               const _groups = groups.data as Array<any>;
@@ -125,7 +125,7 @@ export const LogoutAction = (login: any) =>{  //**** get username from local sto
       dispatch( _loadingStart() );
       try {
           const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
-          await axios.post(env.url+"/v1/authen/logout", login, config);
+          await axios.post(env.url+"v1/authen/logout", login, config);
           localStorage.clear();
           dispatch( _loadingFinish() );
           dispatch( _authenReset() );

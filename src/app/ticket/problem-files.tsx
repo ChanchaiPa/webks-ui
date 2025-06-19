@@ -123,7 +123,7 @@ export default function ProblemFiles() {
     const downloadFile = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, seq_id: number, file_name: string) => {
         e.preventDefault();
         dispatch( _loadingStart() );
-        axios.get(env.url + "/v1/ticket/download/"+ticket.ticket_id+"/"+seq_id, {withCredentials: true, responseType: 'blob'}).then(res => { 
+        axios.get(env.url + "v1/ticket/download/"+ticket.ticket_id+"/"+seq_id, {withCredentials: true, responseType: 'blob'}).then(res => { 
             fileDownload(res.data, file_name);
             dispatch( _loadingFinish() );
         });          

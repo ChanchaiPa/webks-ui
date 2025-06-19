@@ -55,7 +55,7 @@ export default InOutSlice.reducer
 
 
 export const InboxAction =() => {
-    const _serviceurl = env.url+'/v1/ticket/inbox';
+    const _serviceurl = env.url+'v1/ticket/inbox';
     return async(dispatch: any) => {
         dispatch( _loading() );
         try {
@@ -82,7 +82,7 @@ export const OutboxAction =(pageNo: number, pageSize: number, totalRec: number) 
     _param += "?pageNo="   + pageNo;
     _param += "&pageSize=" + pageSize;
     _param += "&totalRec=" + totalRec;
-    const _serviceurl = env.url+'/v1/ticket/outbox' + _param;
+    const _serviceurl = env.url+'v1/ticket/outbox' + _param;
     return async(dispatch: any) => {
         dispatch( _loading() );
         try {

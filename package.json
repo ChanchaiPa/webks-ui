@@ -2,7 +2,7 @@
   "name": "webks-ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://127.0.0.1:3000/webks",
+  "homepage": "http://127.0.0.1:3000/webks/page",
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
     "@testing-library/jest-dom": "^5.14.1",

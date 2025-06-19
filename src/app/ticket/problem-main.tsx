@@ -47,7 +47,7 @@ export default function ProblemMain() {
         const system_id = event.target.value;  console.log("system_id=="  + system_id);
         dispatch( GetSubsystemAction(system_id) );
         setSsimLoading(true);
-        axios.post(env.url+'/v1/ticket/reminder', toSSIM(system_id, 0, 0, 0, tmpTicket.open_date), configapi).then(result => {
+        axios.post(env.url+'v1/ticket/reminder', toSSIM(system_id, 0, 0, 0, tmpTicket.open_date), configapi).then(result => {
             setTmpTicket({...tmpTicket, system_id: system_id, subsystem_id: 0, item_id: 0, module_id: 0, 
                 need_day: result.data.need_day, need_hr: result.data.need_hr, reminder_date: result.data.reminder_date});
             setSsimLoading(false);
@@ -60,7 +60,7 @@ export default function ProblemMain() {
         const subsystem_id = event.target.value;
         dispatch( GetItemAction(tmpTicket.system_id, subsystem_id) );
         setSsimLoading(true);
-        axios.post(env.url+'/v1/ticket/reminder', toSSIM(tmpTicket.system_id, subsystem_id, 0, 0, tmpTicket.open_date), configapi).then(result => {
+        axios.post(env.url+'v1/ticket/reminder', toSSIM(tmpTicket.system_id, subsystem_id, 0, 0, tmpTicket.open_date), configapi).then(result => {
             setTmpTicket({...tmpTicket, subsystem_id: subsystem_id, item_id: 0, module_id: 0, 
                 need_day: result.data.need_day, need_hr: result.data.need_hr, reminder_date: result.data.reminder_date});
             setSsimLoading(false);
@@ -73,7 +73,7 @@ export default function ProblemMain() {
         const item_id = event.target.value;
         dispatch( GetModuleAction(tmpTicket.system_id, tmpTicket.subsystem_id, item_id) );
         setSsimLoading(true);
-        axios.post(env.url+'/v1/ticket/reminder', toSSIM(tmpTicket.system_id, tmpTicket.subsystem_id, item_id, 0, tmpTicket.open_date), configapi).then(result => {
+        axios.post(env.url+'v1/ticket/reminder', toSSIM(tmpTicket.system_id, tmpTicket.subsystem_id, item_id, 0, tmpTicket.open_date), configapi).then(result => {
             setTmpTicket({...tmpTicket, item_id: item_id, module_id: 0, 
                 need_day: result.data.need_day, need_hr: result.data.need_hr, reminder_date: result.data.reminder_date});
             setSsimLoading(false);
@@ -86,7 +86,7 @@ export default function ProblemMain() {
         setSsimLoading(true);
         const module_id = event.target.value;
         setSsimLoading(true);
-        axios.post(env.url+'/v1/ticket/reminder', toSSIM(tmpTicket.system_id, tmpTicket.subsystem_id, tmpTicket.item_id, module_id, tmpTicket.open_date), configapi).then(result => {
+        axios.post(env.url+'v1/ticket/reminder', toSSIM(tmpTicket.system_id, tmpTicket.subsystem_id, tmpTicket.item_id, module_id, tmpTicket.open_date), configapi).then(result => {
             setTmpTicket({...tmpTicket, module_id: module_id, 
                 need_day: result.data.need_day, need_hr: result.data.need_hr, reminder_date: result.data.reminder_date});
             setSsimLoading(false);    
@@ -255,7 +255,7 @@ export default function ProblemMain() {
         dispatch( _loadingStart() );
         console.log("["+typeDiaog+"] " + dataDiaog);
         const param = {"ticket_id": ticket.ticket_id, "type": typeDiaog, "list": dataDiaog}
-        axios.post(env.url+'/v1/ticket/transfer', param, configapi).then(result => {
+        axios.post(env.url+'v1/ticket/transfer', param, configapi).then(result => {
             setTmpTicket({...tmpTicket, problem_status_id: 4});
             dispatch( _loadingFinish() );
         }).catch(error => {

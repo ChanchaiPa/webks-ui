@@ -32,7 +32,7 @@ export default function SsimConfig() {
     const refreshData = useCallback(() => {
         const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
         dispatch( _loadingStart() );
-        axios.get(env.url+'/v1/lookup/ssimkey', config).then(result => {
+        axios.get(env.url+'v1/lookup/ssimkey', config).then(result => {
             dispatch( _loadingFinish() );
             localStorage.setItem("ssim_tree", JSON.stringify(result.data));
             setTreeData(result.data);

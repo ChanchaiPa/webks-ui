@@ -44,31 +44,31 @@ export default function App3Content() {
     const config = { withCredentials: true, headers: {'Content-Type': 'application/json;charset=UTF-8'} };
     useEffect(() => {
         console.log("AppContent load Lookup");
-        axios.get(env.url+'/v1/lookup/system', config).then(result => {
+        axios.get(env.url+'v1/lookup/system', config).then(result => {
             localStorage.setItem("system_list", JSON.stringify(result.data));
         }).catch(error => {
             console.log(error.message);
         });
 
-        axios.get(env.url+'/v1/lookup/problem_status', config).then(result => {
+        axios.get(env.url+'v1/lookup/problem_status', config).then(result => {
             localStorage.setItem("problem_status_list", JSON.stringify(result.data));
         }).catch(error => {
             console.log(error.message);
         });
 
-        axios.get(env.url+'/v1/lookup/call_code', config).then(result => {
+        axios.get(env.url+'v1/lookup/call_code', config).then(result => {
             localStorage.setItem("call_code_list", JSON.stringify(result.data));
         }).catch(error => {
             console.log(error.message);
         }); 
         
-        axios.get(env.url+'/v1/lookup/priority_level', config).then(result => {
+        axios.get(env.url+'v1/lookup/priority_level', config).then(result => {
             localStorage.setItem("priority_list", JSON.stringify(result.data));
         }).catch(error => {
             console.log(error.message);
         });   
         
-        axios.get(env.url+'/v1/lookup/severity_level', config).then(result => {
+        axios.get(env.url+'v1/lookup/severity_level', config).then(result => {
             localStorage.setItem("severity_list", JSON.stringify(result.data));
         }).catch(error => {
             console.log(error.message);
