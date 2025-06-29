@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 //import ResponsivePagination from 'react-responsive-pagination';
 //import 'react-responsive-pagination/themes/minimal.css';
 import { Pagination } from "antd";
@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 import { SearchAction } from '../../store/slices/agent-slice';
 import { PAGE_SIZE_SM, _User, initUser } from '../schema';
 import { getGroupName, getLevelName } from '../lookup';
+import axios from 'axios';
+import { env } from '../../Environment';
+import debounce from 'lodash.debounce';
 
 
 export default function AgentConfig() {
@@ -39,6 +42,36 @@ export default function AgentConfig() {
       setCurItem(initUser());
       dispatch( SearchAction(select, PAGE_SIZE_SM, total, navigate) );
   }
+
+
+
+  /********************/
+  const [wording,  setWording]  = useState("");
+  const [userList, setUserList] = useState([]);
+
+  const handlerWordingChange = (event: any) => {
+    const _wording = event.target.value;
+    setWording(_wording);
+    if (_wording.trim().length <= 1) 
+        setUserList([]);
+    else
+        debouncedFetch(_wording);
+  }
+
+  const debouncedFetch = useCallback(
+    debounce(async (_wording) => {
+      const result = await fetchUser(_wording);
+      setUserList(result);
+    }, 1000), // Debounce for 500 milliseconds
+    [] // Empty dependency array ensures debouncedSearch is created only once
+  );  
+
+  const fetchUser = async(_wording: string) => {
+    const result = await axios.get(env.url+'mock_data?wording='+_wording);
+    return result.data
+  } 
+  /********************/
+
 
 
   return (<div className='container-fluid py-3 set_tab_fit'>
@@ -129,8 +162,25 @@ export default function AgentConfig() {
           <div className='col-3 d-flex align-items-end' >
               <a href="#" style={{textDecoration: 'none', color: 'red'}}>RESET PASSWORD</a>
           </div>
-        </div>      
+        </div>    
       </div>
     </fieldset>  
+
+
+    <div className='row mb-2'>
+      <div className='col-3'>
+        <label className="form-label">User Name Demo</label>
+        <input type="text" placeholder='Type to search' className="form-control form-control-sm" value={wording} onChange={(e) => handlerWordingChange(e)}/>
+        
+        <ul>
+          { 
+              userList.map((user: any, index) => { 
+                  return(<li key={index} onClick={()=> {setWording(user.first_name); setUserList([]);} }>{user.first_name}</li>) 
+              })
+          }
+        </ul>
+
+      </div>
+    </div>      
   </div>)
 }
