@@ -67,7 +67,7 @@ export default function AgentConfig() {
   );  
 
   const fetchUser = async(_wording: string) => {
-    const result = await axios.get(env.url+'mock_data?wording='+_wording);
+    const result = await axios.get(env.url.replace("webks/", "")+'mock_data?wording='+_wording);
     return result.data
   } 
   /********************/
