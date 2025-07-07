@@ -9,4 +9,4 @@ const env_config = {
     PRO: { status: Deploy.PRO, basename: '/webks', app_root: '/page', url: '../' }
 }
 
-export const env = env_config.DEV; 
+export const env = env_config.PRO; 
